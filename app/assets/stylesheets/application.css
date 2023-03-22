@@ -17,3 +17,18 @@ h1{
     color:red;
 }
 
+/* map.html */
+.container{
+    display: flex;
+}
+#map {
+    padding: 10px;
+    display: block;
+    width: 75%;
+}
+
+#checkboard{
+    display: block;
+    width: 20%;
+    padding: 10px;
+}
