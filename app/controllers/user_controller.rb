@@ -7,7 +7,7 @@ class UserController < ApplicationController
         authenticate_user
         @current_user.name = params[:name]
         if !@current_user.save
-            flash[:notice]="Failed to change your name."
+            # flash[:notice]="Failed to change your name."
         end
         redirect_to('/user')
     end
@@ -18,9 +18,9 @@ class UserController < ApplicationController
             @current_user.password = params[:new_password]
         end
         if @current_user.save
-            flash[:notice]="Succeeded in changing your password!"
+            # flash[:notice]="Succeeded in changing your password!"
         else
-            flash[:notice]="Failed to change your password."
+            # flash[:notice]="Failed to change your password."
             puts @current_user.errors.full_messages
         end
         redirect_to('/user')
@@ -35,12 +35,12 @@ class UserController < ApplicationController
     def loginnow
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
-            flash[:notice]='Login Succeeded'
+            # flash[:notice]='Login Succeeded'
             session[:user_id] = user.id
             set_current_user
             redirect_to('/map')
         else
-            flash[:notice]='Login Failed'
+            # flash[:notice]='Login Failed'
             @email = params[:email]
             @password = params[:password]
             render('user/login')
@@ -56,7 +56,7 @@ class UserController < ApplicationController
     def signupnow
         user = User.new(name: params[:name], email: params[:email],password: params[:password])
         if user.save
-            flash[:notice]='Signup Succeeded'
+            # flash[:notice]='Signup Succeeded'
             24.times do |i| 
                 Map.create(user_id: user.id, s_dis: i+1, status: 0)
             end

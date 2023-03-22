@@ -9,7 +9,8 @@
       <% if map.status=="walked"%>
       <%= "checked" %>
       <%end%> />
-      <%= "駅間#{map.s_dis} : #{map.status}" %></p>
+      <%# <%= "駅間#{map.s_dis} : #{map.status}" %>
+    </p>
     <% if map.s_dis == @maps.length %>
       <% sta_last=Station.find_by(sta_id: map.s_dis+1) %>
       <p><%= "#{sta_last.name}" %></p>
