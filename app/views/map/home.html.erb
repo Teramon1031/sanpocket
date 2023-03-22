@@ -1,11 +1,10 @@
-<h1>Helllo Map</h1>
-<p>Find me in app/views/map/home.html.erb</p>
+<p><%= @current_user.name %></p>
 <%= form_tag("/map/new") do %>
   <% @maps.each do |map| %>
     <% sta=Station.find_by(sta_id: map.s_dis) %>
     <p><%= "#{sta.name}" %></p>
-    <!--check box-->
     <p>
+      <input name="<%="#{map.s_dis}"%>" type="hidden" value="0" />
       <input id="toggle" class="toggle_input" type="checkbox" name=<%="#{map.s_dis}"%>
       <% if map.status=="walked"%>
       <%= "checked" %>
@@ -17,4 +16,7 @@
     <% end %>
   <% end %>
   <input class="form-btn" type="submit" value="変更!">
+<% end %>
+<%= form_tag("/logout") do %>
+  <input class="form-btn" type="submit" value="ログアウト">
 <% end %>

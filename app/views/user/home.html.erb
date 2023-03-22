@@ -1,0 +1,18 @@
+<h1>マイページ</h1>
+<h2><%= @current_user.name %></h2>
+<%= form_tag("/user/editName") do %>
+  <p>名前の変更</p>
+  <input name="name" type="text" value="<%= @current_user.name %>" />
+  <input class="form-btn" type="submit" value="変更!">
+<% end %>
+<%= form_tag("/user/editPW") do %>
+  <p>パスワードの変更</p>
+  今のパスワード
+  <input name="current_password" type="text" />
+  変更後のパスワード
+  <input name="new_password" type="text" />
+  <input class="form-btn" type="submit" value="変更!">
+<% end %>
+<%= form_tag("/logout") do %>
+  <input class="form-btn" type="submit" value="ログアウト">
+<% end %>

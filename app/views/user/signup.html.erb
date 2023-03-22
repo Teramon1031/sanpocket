@@ -1,0 +1,10 @@
+<%= form_tag("/signupnow") do %>
+  <p>名前</p>
+  <input type="text" name="name" value="<%= @name %>">
+  <p>Email</p>
+  <input type="text" name="email" value="<%= @email %>">
+  <p>パスワード</p>
+  <input type="password" name="password" value="<%= @password %>">
+  <input type="submit" value="サインアップ">
+  <%= flash[:notice] %>
+<% end %>
