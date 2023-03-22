@@ -1,4 +1,7 @@
 <p><%= @current_user.name %></p>
+<div class="container">
+<div id="map"></div>
+<div id="checkboard">
 <%= form_tag("/map/new") do %>
   <% @maps.each do |map| %>
     <% sta=Station.find_by(sta_id: map.s_dis) %>
@@ -21,3 +24,180 @@
 <%= form_tag("/logout") do %>
   <input class="form-btn" type="submit" value="ログアウト">
 <% end %>
+</div>
+</div>
+
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llMDI4IiwiYSI6ImNsZmh2YzJ6cTA4Z3Yzd281MGMzMjNrcGgifQ.KPYCfhcKc69-Af5Ln3a8Gw';
+const map = new mapboxgl.Map({
+    container: 'map',
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [139.697170, 35.705330],
+    zoom: 12
+});
+
+function station(place, color, layerName) {
+
+    map.addSource(layerName, {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': place
+            }
+        }
+    });
+    map.addLayer({
+        'id': layerName,
+        'type': 'line',
+        'source': layerName,
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': color,
+            'line-width': 8
+        }
+    });
+};
+
+
+map.on('load', () => {
+
+    color1 = '#778899';
+    place1 = [
+        [139.711086, 35.730256], //池袋
+        [139.729971, 35.72569], //新大塚
+        [139.737184, 35.716989], //茗荷谷
+        [139.759914, 35.706671], //本郷三丁目
+        [139.763952, 35.700614], //御茶ノ水
+        [139.767575, 35.695434], //淡路町
+        [139.7662, 35.686564], //大手町
+        [139.764708, 35.681753], //東京
+        [139.763965, 35.671989] //銀座
+    ];
+
+    station(place1, color1, "route1");
+
+    color2 = 'red';
+    place2 = [
+        [139.763965, 35.671989], //銀座
+        [139.750899, 35.673838], //霞が関
+        [139.745219, 35.67393], //国会議事堂
+        [139.737047, 35.677021], //赤坂見附
+        [139.729947, 35.684586], //四ツ谷
+        [139.720103, 35.687958], //四谷三丁目
+        [139.71069, 35.688588], //新宿御園苑前
+        [139.704895, 35.690847], //新宿三丁目
+        [139.700711, 35.69235], //新宿
+        [139.692778, 35.694298], //西新宿
+        [139.68291, 35.69792], //中野坂上
+        [139.66903, 35.697491], //新中野
+        [139.657822, 35.697802], //東高円寺
+        [139.648068, 35.697985], //新高円寺
+        [139.63576, 35.699624], //南阿佐ヶ谷
+        [139.620116, 35.70430] //荻窪
+    ];
+
+    station(place2, color2, "route2");
+
+
+});
+// Create a default Marker and add it to the map.
+const marker1 = new mapboxgl.Marker()
+    .setLngLat([139.711086, 35.730256]) //池袋
+    .addTo(map);
+const marker2 = new mapboxgl.Marker()
+    .setLngLat([139.729971, 35.72569]) //新大塚
+    .addTo(map);
+
+const marker3 = new mapboxgl.Marker()
+    .setLngLat([139.737184, 35.716989]) //茗荷谷
+    .addTo(map);
+
+const marker4 = new mapboxgl.Marker()
+    .setLngLat([139.759914, 35.706671]) //本郷三丁目
+    .addTo(map);
+
+const marker5 = new mapboxgl.Marker()
+    .setLngLat([139.763952, 35.700614]) //御茶ノ水
+    .addTo(map);
+
+const marker6 = new mapboxgl.Marker()
+    .setLngLat([139.767575, 35.695434]) //淡路町
+    .addTo(map);
+
+const marker7 = new mapboxgl.Marker()
+    .setLngLat([139.7662, 35.686564]) //大手町
+    .addTo(map);
+
+const marker8 = new mapboxgl.Marker()
+    .setLngLat([139.764708, 35.681753]) //東京
+    .addTo(map);
+
+const marker9 = new mapboxgl.Marker()
+    .setLngLat([139.763965, 35.671989]) //銀座
+    .addTo(map);
+
+const marker10 = new mapboxgl.Marker()
+    .setLngLat([139.750899, 35.673838]) //霞が関
+    .addTo(map);
+
+const marker11 = new mapboxgl.Marker()
+    .setLngLat([139.745219, 35.67393]) //国会議事堂
+    .addTo(map);
+
+const marker12 = new mapboxgl.Marker()
+    .setLngLat([139.737047, 35.677021]) //赤坂見附
+    .addTo(map);
+
+const marker13 = new mapboxgl.Marker()
+    .setLngLat([139.729947, 35.684586]) //四ツ谷
+    .addTo(map);
+
+const marker14 = new mapboxgl.Marker()
+    .setLngLat([139.720103, 35.687958]) //四谷三丁目
+    .addTo(map);
+
+const marker15 = new mapboxgl.Marker()
+    .setLngLat([139.71069, 35.688588]) //新宿御園苑前
+    .addTo(map);
+
+const marker16 = new mapboxgl.Marker()
+    .setLngLat([139.704895, 35.690847]) //新宿三丁目
+    .addTo(map);
+
+const marker17 = new mapboxgl.Marker()
+    .setLngLat([139.700711, 35.69235]) //新宿
+    .addTo(map);
+
+const marker18 = new mapboxgl.Marker()
+    .setLngLat([139.692778, 35.694298]) //西新宿
+    .addTo(map);
+
+const marker19 = new mapboxgl.Marker()
+    .setLngLat([139.68291, 35.69792]) //中野坂上
+    .addTo(map);
+
+const marker20 = new mapboxgl.Marker()
+    .setLngLat([139.66903, 35.697491]) //新中野
+    .addTo(map);
+
+const marker21 = new mapboxgl.Marker()
+    .setLngLat([139.657822, 35.697802]) //東高円寺
+    .addTo(map);
+
+const marker22 = new mapboxgl.Marker()
+    .setLngLat([139.63576, 35.699624]) //南阿佐ヶ谷
+    .addTo(map);
+
+const marker23 = new mapboxgl.Marker()
+    .setLngLat([139.620116, 35.70430]) //荻窪
+    .addTo(map);
+
+</script>
