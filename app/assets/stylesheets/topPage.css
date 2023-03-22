@@ -1,4 +1,4 @@
-.button003 a {
+.button003 input {
     background: #eee;
     border-radius: 50px;
     position: relative;
@@ -16,12 +16,12 @@
 
 }
 
-.button003 a:hover {
+.button003 input:hover {
     background: #313131;
     color: #FFF;
 }
 
-.button003 a:after {
+.button003 input:after {
     content: '';
     width: 5px;
     height: 5px;
@@ -35,11 +35,11 @@
     transition: 0.3s ease-in-out;
 }
 
-.button003 a:hover:after {
+.button003 input:hover:after {
     border-color: #FFF;
 }
 
-.signUp a {
+.signUp input {
     background: #eee;
     border-radius: 50px;
     position: relative;
@@ -57,12 +57,12 @@
     left: 200px;
 }
 
-.signUp a:hover {
+.signUp input:hover {
     background: #313131;
     color: #FFF;
 }
 
-.signUp a:after {
+.signUp input:after {
     content: '';
     width: 5px;
     height: 5px;
@@ -76,7 +76,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.signUp a:hover:after {
+.signUp input:hover:after {
     border-color: #FFF;
 }
 
