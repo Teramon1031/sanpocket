@@ -1,0 +1,135 @@
+.button003 a {
+    background: #eee;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    /*　位置の移動 */
+    right: 200px;
+
+}
+
+.button003 a:hover {
+    background: #313131;
+    color: #FFF;
+}
+
+.button003 a:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #313131;
+    border-right: 3px solid #313131;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+}
+
+.button003 a:hover:after {
+    border-color: #FFF;
+}
+
+.signUp a {
+    background: #eee;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    /* 位置の移動 */
+    bottom: 545px;
+    left: 200px;
+}
+
+.signUp a:hover {
+    background: #313131;
+    color: #FFF;
+}
+
+.signUp a:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #313131;
+    border-right: 3px solid #313131;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+}
+
+.signUp a:hover:after {
+    border-color: #FFF;
+}
+
+
+.top-body {
+    margin: 0;
+    width: 600px;
+    /* height: 375px; */
+
+    background-image: url("https://i.ibb.co/SvY7jWQ/tree-modified.jpg");
+    /*背景画像を指定*/
+    background-repeat: no-repeat;
+    /*背景画像の繰り返しを解除*/
+    background-size: cover;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+header {
+    margin-top: 20px;
+    color: black;
+    font-size: x-large;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.6;
+    backdrop-filter: blur(10px);
+    font-family: arial;
+
+}
+
+.center {
+    text-align: center;
+}
+
+.top-body p {
+    position: relative;
+    left: 20px;
+
+    padding: 20px;
+    top: 100px;
+    font-family: arial;
+    font-size: xx-large;
+    color: #FFF;
+}
+
+.margin {
+    margin-top: 500px;
+}

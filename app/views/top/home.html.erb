@@ -1,2 +1,24 @@
-<h1>Top#home</h1>
-<p>Find me in app/views/top/home.html.erb</p>
+<div class="top-body">
+    <header>
+            <h1 class="title">Sanpocket</h1>
+    </header>
+    <article>
+        <section>
+            <div class="center">
+                <p>Let's Walk!</p>
+            </div>
+        </section>
+    </article>
+    <!-- --- Sing inボタン --- -->
+    <%= form_tag("/loginnow") do %>
+    <div class="button003 margin">
+        <input type="submit"><a>Sign In</a></>
+    </div>
+    <% end %>
+    <!---- Sing upボタン ----->
+    <%= form_tag("/signupnow") do %>
+    <div class="signUp margin">
+        <input type="submit"><a>Sign Up</a></>
+    </div>
+    <% end %>
+</div>
