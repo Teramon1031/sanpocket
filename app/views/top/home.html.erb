@@ -1,14 +1,12 @@
 <div class="top-body">
     <header>
-            <h1 class="title">Sanpocket</h1>
+        <h1 class="title">Sanpocket</h1>
     </header>
     <article>
-        <section>
-            <div class="center">
-                <p>Let's Walk!</p>
-            </div>
-        </section>
-    </article>
+        <div class="center">
+            <p>Let's Walk!</p>
+        </div>
+    <div class="buttons">
     <!-- --- Sing inボタン --- -->
     <%= form_tag("map/new") do %>
     <div class="button003 margin">
@@ -17,8 +15,10 @@
     <% end %>
     <!---- Sing upボタン ----->
     <%= form_tag("/signup") do %>
-    <div class="signUp margin">
+    <div class="button003 margin">
         <input type="submit" value="Sign Up"/>
     </div>
     <% end %>
+    </div>
+    </article>
 </div>

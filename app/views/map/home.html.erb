@@ -7,11 +7,11 @@
     <% sta=Station.find_by(sta_id: map.s_dis) %>
     <p><%= "#{sta.name}" %></p>
     <p>
-      <input name="<%="#{map.s_dis}"%>" type="hidden" value="0" />
       <input id="toggle" class="toggle_input" type="checkbox" name=<%="#{map.s_dis}"%>
       <% if map.status=="walked"%>
       <%= "checked" %>
       <%end%> />
+      <input name="<%="#{map.s_dis}"%>" type="hidden" value="0" />
       <%# <%= "駅間#{map.s_dis} : #{map.status}" %>
     </p>
     <% if map.s_dis == @maps.length %>
