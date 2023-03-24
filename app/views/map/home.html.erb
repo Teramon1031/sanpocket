@@ -5,7 +5,7 @@
 <%= form_tag("/map/new") do %>
   <% @maps.each do |map| %>
     <% sta=Station.find_by(sta_id: map.s_dis) %>
-    <p><%= "#{sta.name}" %></p>
+    <div class="check">
     <p>
       <input name="<%="#{map.s_dis}"%>" type="hidden" value="0" />
       <input id="toggle" class="toggle_input" type="checkbox" name=<%="#{map.s_dis}"%>
@@ -14,6 +14,8 @@
       <%end%> />
       <%# <%= "駅間#{map.s_dis} : #{map.status}" %>
     </p>
+    <p><%= "#{sta.name}" %></p>
+    </div>
     <% if map.s_dis == @maps.length %>
       <% sta_last=Station.find_by(sta_id: map.s_dis+1) %>
       <p><%= "#{sta_last.name}" %></p>

@@ -1,0 +1,93 @@
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button003 input {
+    display: block;
+    padding: 10px 25px;
+
+    background: #eee;
+    color: #313131;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+}
+
+.button003 input:hover {
+    background: #313131;
+    color: #FFF;
+}
+
+.button003 input:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #313131;
+    border-right: 3px solid #313131;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+}
+
+.button003 input:hover:after {
+    border-color: #FFF;
+}
+
+body{
+    padding: 0;
+}
+
+.top-body {
+    margin: 0;
+    width: 100%;
+    height: 1000px;
+    background-image: url("https://i.ibb.co/SvY7jWQ/tree-modified.jpg");
+    /*背景画像を指定*/
+    background-repeat: no-repeat;
+    /*背景画像の繰り返しを解除*/
+    background-size: cover;
+    width: 100%;
+    max-width: 1280px;
+}
+
+header {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 100px;
+    
+    margin-top: 20px;
+    color: black;
+    background: white;
+    backdrop-filter: blur(10px);
+    opacity: 0.6;
+    font-family: arial;
+    font-size: x-large;
+
+}
+
+article{
+   padding-top: 120px;
+}
+
+.center {
+    text-align: center;
+}
+
+.top-body p {
+    padding: 20px;
+    top: 100px;
+    font-family: arial;
+    font-size: xx-large;
+    color: #FFF;
+}

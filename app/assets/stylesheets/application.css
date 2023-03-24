@@ -13,9 +13,6 @@
  *= require_tree .
  *= require_self
  */
-h1{
-    color:red;
-}
 
 /* map.html */
 .container{
@@ -31,4 +28,8 @@ h1{
     display: block;
     width: 20%;
     padding: 10px;
+}
+
+.check{
+    display: flex;
 }
