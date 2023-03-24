@@ -5,11 +5,12 @@
 <%= form_tag("/map/new") do %>
   <% @maps.each do |map| %>
     <% sta=Station.find_by(sta_id: map.s_dis) %>
+    <% next_sta=Station.find_by(sta_id: map.s_dis+1) %>
 
     <% if map.status=="walked"%>
-      <input type="hidden" class="walked_station" value="<%=[sta.x,sta.y]%>">
+      <input type="hidden" class="walked_station" value="<%=[sta.x,sta.y,next_sta.x,next_sta.y]%>">
     <% else %>
-      <input type="hidden" class="uncharged_station" value="<%=[sta.x,sta.y]%>">
+      <input type="hidden" class="uncharged_station" value="<%=[sta.x,sta.y,next_sta.x,next_sta.y]%>">
     <%end%>
     <div class="check">
     <p>
@@ -20,12 +21,9 @@
       <%end%> />
       <%# <%= "駅間#{map.s_dis} : #{map.status}" %>
     </p>
-    <p><%= "#{sta.name}" %></p>
+    <p><%= "#{sta.name} - #{next_sta.name}" %></p>
     </div>
-    <% if map.s_dis == @maps.length %>
-      <% sta_last=Station.find_by(sta_id: map.s_dis+1) %>
-      <p><%= "#{sta_last.name}" %></p>
-    <% end %>
+    
   <% end %>
   <input class="form-btn" type="submit" value="変更!">
 <% end %>
@@ -38,15 +36,34 @@
 
 <script>
 
-var walkedStations = Array.from(document.getElementsByClassName('walked_station')).map((elem) => {
-  tmp_elems = elem.value.split(/[\[\,\]]/);
-  return tmp_elems.filter((elem)=>elem !== "").map(elem => Number(elem))})
-console.log(walkedStations);
+function pickMarkedStations(idName){
+  var positionStrList = Array.from(document.getElementsByClassName(idName)).map((elem) => {return elem.value});
+  // positionStrList: List of string [sta.x, sta.y, next_sta.x, next_sta.y]
+  var positions = positionStrList.map(elem => elem.split(/[\[\,\]]/).filter((elem)=>elem !== "").map(elem => Number(elem)));
+  // positions:  List which consists of [sta.x, sta.y, next_sta.x, next_sta.y]
 
-var unchargedStations = Array.from(document.getElementsByClassName('uncharged_station')).map((elem) => {
-  tmp_elems = elem.value.split(/[\[\,\]]/);
-  return tmp_elems.filter((elem)=>elem !== "").map(elem => Number(elem))})
-console.log(unchargedStations);
+  var markedPostionList = []
+  for (var pos of positions){
+    [cur_x, cur_y, next_x, next_y] = pos;
+
+    if(markedPostionList.length === 0){
+      // markedPostionListが空の場合は、現在の駅と次の駅を共に追加
+      markedPostionList.push([cur_x, cur_y]);
+      markedPostionList.push([next_x, next_y]);
+    }
+    else{
+      // markedPostionListの末尾の駅を確認
+      [pre_x, pre_y] = markedPostionList[markedPostionList.length - 1]
+      // 今の駅がすでにmarkedPostionListに追加されていれば
+      if ((pre_x === cur_x) && (pre_y === cur_y)){
+        // 次の駅のみ追加
+        markedPostionList.push([next_x, next_y])
+      }
+    }
+  }
+
+  return markedPostionList;
+}
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llMDI4IiwiYSI6ImNsZmh2YzJ6cTA4Z3Yzd281MGMzMjNrcGgifQ.KPYCfhcKc69-Af5Ln3a8Gw';
 const map = new mapboxgl.Map({
@@ -87,46 +104,16 @@ function station(place, color, layerName) {
 
 
 map.on('load', () => {
+  var walkedLines = pickMarkedStations('walked_station');
+  var unchargedLines = pickMarkedStations('uncharged_station');
 
-    GRAY = '#778899';
-    place1 = [
-        [139.711086, 35.730256], //池袋
-        [139.729971, 35.72569], //新大塚
-        [139.737184, 35.716989], //茗荷谷
-        [139.759914, 35.706671], //本郷三丁目
-        [139.763952, 35.700614], //御茶ノ水
-        [139.767575, 35.695434], //淡路町
-        [139.7662, 35.686564], //大手町
-        [139.764708, 35.681753], //東京
-        [139.763965, 35.671989] //銀座
-    ];
+  GRAY = '#778899';
+  RED = 'red';
 
-
-    RED = 'red';
-    place2 = [
-        [139.763965, 35.671989], //銀座
-        [139.750899, 35.673838], //霞が関
-        [139.745219, 35.67393], //国会議事堂
-        [139.737047, 35.677021], //赤坂見附
-        [139.729947, 35.684586], //四ツ谷
-        [139.720103, 35.687958], //四谷三丁目
-        [139.71069, 35.688588], //新宿御園苑前
-        [139.704895, 35.690847], //新宿三丁目
-        [139.700711, 35.69235], //新宿
-        [139.692778, 35.694298], //西新宿
-        [139.68291, 35.69792], //中野坂上
-        [139.66903, 35.697491], //新中野
-        [139.657822, 35.697802], //東高円寺
-        [139.648068, 35.697985], //新高円寺
-        [139.63576, 35.699624], //南阿佐ヶ谷
-        [139.620116, 35.70430] //荻窪
-    ];
-
-    station(walkedStations, RED, "route1");
-    station(unchargedStations, GRAY, "route2");
-
-
+  station(walkedLines, RED, "route1");
+  station(unchargedLines, GRAY, "route2");
 });
+
 // Create a default Marker and add it to the map.
 const marker1 = new mapboxgl.Marker()
     .setLngLat([139.711086, 35.730256]) //池袋
@@ -223,4 +210,37 @@ const marker24 = new mapboxgl.Marker()
     .setLngLat([139.620116, 35.70430]) //荻窪
     .addTo(map);
 
+
+//// デバッグ用
+
+// place1 = [
+//     [139.711086, 35.730256], //池袋
+//     [139.729971, 35.72569], //新大塚
+//     [139.737184, 35.716989], //茗荷谷
+//     [139.759914, 35.706671], //本郷三丁目
+//     [139.763952, 35.700614], //御茶ノ水
+//     [139.767575, 35.695434], //淡路町
+//     [139.7662, 35.686564], //大手町
+//     [139.764708, 35.681753], //東京
+//     [139.763965, 35.671989] //銀座
+// ];
+
+// place2 = [
+//     [139.763965, 35.671989], //銀座
+//     [139.750899, 35.673838], //霞が関
+//     [139.745219, 35.67393], //国会議事堂
+//     [139.737047, 35.677021], //赤坂見附
+//     [139.729947, 35.684586], //四ツ谷
+//     [139.720103, 35.687958], //四谷三丁目
+//     [139.71069, 35.688588], //新宿御園苑前
+//     [139.704895, 35.690847], //新宿三丁目
+//     [139.700711, 35.69235], //新宿
+//     [139.692778, 35.694298], //西新宿
+//     [139.68291, 35.69792], //中野坂上
+//     [139.66903, 35.697491], //新中野
+//     [139.657822, 35.697802], //東高円寺
+//     [139.648068, 35.697985], //新高円寺
+//     [139.63576, 35.699624], //南阿佐ヶ谷
+//     [139.620116, 35.70430] //荻窪
+// ];
 </script>
