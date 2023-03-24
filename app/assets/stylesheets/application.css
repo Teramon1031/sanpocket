@@ -29,3 +29,7 @@
     width: 20%;
     padding: 10px;
 }
+
+.check{
+    display: flex;
+}
